@@ -40,7 +40,7 @@ public class ValidationsUtil {
 
     public void validateBookQuantity(int quantity) {
         {
-            if (quantity<=0 || quantity>1000 ) {
+            if (quantity<=0) {
                 throw new BookValidationException(ErrorCode.BOOK_QUANTITY_INVALID.getCode(), ErrorCode.BOOK_QUANTITY_INVALID.getMessage());
             }
         }

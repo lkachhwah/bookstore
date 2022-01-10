@@ -8,6 +8,7 @@ import com.example.bookstore.model.StatsDateDetails;
 import com.example.bookstore.repository.OrderRepository;
 import com.example.bookstore.service.BookService;
 import com.example.bookstore.service.CustomerService;
+import com.example.bookstore.service.NextSequenceService;
 import com.example.bookstore.service.OrderService;
 import com.example.bookstore.utils.ValidationsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     CustomerService customerService;
 
     @Autowired
-    NextSequenceServiceImpl nextSequenceService;
+    NextSequenceService nextSequenceService;
 
     @Override
     public OrderDetails addOrder(OrderDetails orderDetails) {
@@ -45,8 +45,7 @@ public class OrderServiceImpl implements OrderService {
         validateCustomerId(orderDetails.getCustomerId());
         orderDetails.setStatus(OrderStatus.FAILED);
         orderDetails.setId(nextSequenceService.getNextSequence("order"));
-        if(bookService.bookPurchased(orderDetails.getBookId(),orderDetails.getQuantity()))
-        {
+        if (bookService.bookPurchased(orderDetails.getBookId(), orderDetails.getQuantity())) {
             orderDetails.setStatus(OrderStatus.COMPLETED);
         }
         return orderRepository.save(orderDetails);
@@ -59,17 +58,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDetails getOrderById(long id) {
         Optional<OrderDetails> byId = orderRepository.findById(id);
-        if(byId.isEmpty())
-        {
-            throw new OrderDetailsException(ErrorCode.ORDER_ID_NOT_VALID.getCode(),ErrorCode.ORDER_ID_NOT_VALID.getMessage());
+        if (byId.isEmpty()) {
+            throw new OrderDetailsException(ErrorCode.ORDER_ID_NOT_VALID.getCode(), ErrorCode.ORDER_ID_NOT_VALID.getMessage());
         }
         return byId.get();
     }
 
     @Override
     public Page<OrderDetails> getOrdersByCustomerId(long id, Pageable pageable) {
-         validateCustomerId(id);
-         return orderRepository.findByCustomerId(id, pageable);
+        validateCustomerId(id);
+        return orderRepository.findByCustomerId(id, pageable);
     }
 
     @Override

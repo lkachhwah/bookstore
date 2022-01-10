@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     ValidationsUtil validationsUtil;
+
     @Override
     public Book addBook(Book book) {
         validationsUtil.validateBook(book);
@@ -33,9 +34,8 @@ public class BookServiceImpl implements BookService {
     }
 
     private void validateBookNameAlreadyExist(Book book) {
-        if(Objects.nonNull(bookRepository.findByBookName(book.getBookName())))
-        {
-            throw new BookValidationException(ErrorCode.BOOK_NAME_ALREADY_USED.getCode(),ErrorCode.BOOK_NAME_ALREADY_USED.getMessage());
+        if (Objects.nonNull(bookRepository.findByBookName(book.getBookName()))) {
+            throw new BookValidationException(ErrorCode.BOOK_NAME_ALREADY_USED.getCode(), ErrorCode.BOOK_NAME_ALREADY_USED.getMessage());
         }
     }
 
@@ -44,28 +44,26 @@ public class BookServiceImpl implements BookService {
         validationsUtil.validateBookQuantity(quantity);
         Optional<Book> byId = getBookById(id);
         Book book = byId.get();
-            book.setQuantity(book.getQuantity()+quantity);
-            Book saveBookStock = bookRepository.save(book);
-            return saveBookStock.getQuantity();
+        book.setQuantity(book.getQuantity() + quantity);
+        return bookRepository.save(book).getQuantity();
     }
 
     @Override
     public boolean bookPurchased(long id, int quantity) {
         Optional<Book> bookById = getBookById(id);
         Book book = bookById.get();
-        if(book.getQuantity()>quantity)
-        {
-            book.setQuantity(book.getQuantity()-quantity);
+        if (book.getQuantity() > quantity) {
+            book.setQuantity(book.getQuantity() - quantity);
             bookRepository.save(book);
             return true;
         }
         return false;
     }
+
     private Optional<Book> getBookById(long id) {
         Optional<Book> byId = bookRepository.findById(id);
-        if(byId.isEmpty())
-        {
-            throw new BookValidationException(ErrorCode.BOOK_ID_INVALID.getCode(),ErrorCode.BOOK_ID_INVALID.getMessage());
+        if (byId.isEmpty()) {
+            throw new BookValidationException(ErrorCode.BOOK_ID_INVALID.getCode(), ErrorCode.BOOK_ID_INVALID.getMessage());
         }
         return byId;
     }

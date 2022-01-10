@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "aabada7d-cb6f-4dea-b614-7ba1825964ff",
+		"name": "getir",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addCustomer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Lalit\",\n    \"middleName\":\"kanhaiyalal\",\n    \"lastName\":\"kachhwah\",\n    \"emailId\":\"lalit2@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCustomerById",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/customer/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"customer",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addBook",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookName\":\"Let Explore3\",\n    \"quantity\":10,\n    \"authorName\":\"Lalit Kachhwah\",\n    \"price\" :20.25\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateBookQuantity",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					},
+					{
+						"key": "quantity",
+						"value": "-1",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addOrder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\":1,\n    \"bookId\":1,\n    \"quantity\": 2,\n    \"amount\": 25.00\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderDetailsByCustomerId",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "page",
+						"value": "0",
+						"type": "text"
+					},
+					{
+						"key": "size",
+						"value": "3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/order/customer/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"order",
+						"customer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderDetailsById",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/order/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"order",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "statsformontlyOrder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tpwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startDate\":\"01-12-2021\",\n    \"endDate\":\"10-01-2022\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
